@@ -18,7 +18,6 @@ export class LakeController extends Controller {
         }
     }
 
-    // have a problem here (
 
     @Get('/{id}')
     public async get(id: string): Promise<ILakeModel> {
