@@ -4,55 +4,22 @@ import { LakeController } from './lake.controller';
 import * as express from 'express';
 
 const models: TsoaRoute.Models = {
+    "IFishModel": {
+        "properties": {
+            "name": { "dataType": "string", "required": true },
+        },
+    },
     "ILakeModel": {
         "properties": {
             "id": { "dataType": "double" },
             "name": { "dataType": "string", "required": true },
-            "salmon": { "dataType": "double", "required": true },
-            "tuna": { "dataType": "double", "required": true },
+            "fish": { "dataType": "array", "array": { "ref": "IFishModel" }, "required": true },
         },
     },
 };
 const validationService = new ValidationService(models);
 
 export function RegisterRoutes(app: express.Express) {
-    app.get('/lakes',
-        function(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new LakeController();
-
-
-            const promise = controller.getAll.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
-    app.get('/lakes/:id',
-        function(request: any, response: any, next: any) {
-            const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-            };
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new LakeController();
-
-
-            const promise = controller.get.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
     app.post('/lakes',
         function(request: any, response: any, next: any) {
             const args = {
@@ -70,45 +37,6 @@ export function RegisterRoutes(app: express.Express) {
 
 
             const promise = controller.create.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
-    app.put('/lakes/:id',
-        function(request: any, response: any, next: any) {
-            const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-                requestBody: { "in": "body", "name": "requestBody", "required": true, "ref": "ILakeModel" },
-            };
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new LakeController();
-
-
-            const promise = controller.update.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
-    app.delete('/lakes/:id',
-        function(request: any, response: any, next: any) {
-            const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-            };
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new LakeController();
-
-
-            const promise = controller.remove.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
 

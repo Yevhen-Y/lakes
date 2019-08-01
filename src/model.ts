@@ -1,6 +1,6 @@
+import { IFishModel } from './fish.model'
 export interface ILakeModel {
     id?: number,
     name: string,
-    salmon: number,
-    tuna: number
+    fish: Array<IFishModel>
 }
