@@ -1,9 +1,10 @@
 import * as mongoose from 'mongoose';
-import { IFishModel } from './fish.model';
 
 const LakeSchema = new mongoose.Schema({
     name: String,
-    fish: Array<IFishModel>()
+    type: String,
+    salmon: Number,
+    tuna: Number
 });
 
 const LakeModel = mongoose.model('Lake', LakeSchema);

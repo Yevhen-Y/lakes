@@ -1,44 +1,12 @@
 /* tslint:disable */
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute } from 'tsoa';
-import { LakeController } from './lake.controller';
 import * as express from 'express';
 
 const models: TsoaRoute.Models = {
-    "IFishModel": {
-        "properties": {
-            "name": { "dataType": "string", "required": true },
-        },
-    },
-    "ILakeModel": {
-        "properties": {
-            "id": { "dataType": "double" },
-            "name": { "dataType": "string", "required": true },
-            "fish": { "dataType": "array", "array": { "ref": "IFishModel" }, "required": true },
-        },
-    },
 };
 const validationService = new ValidationService(models);
 
 export function RegisterRoutes(app: express.Express) {
-    app.post('/lakes',
-        function(request: any, response: any, next: any) {
-            const args = {
-                requestBody: { "in": "body", "name": "requestBody", "required": true, "ref": "ILakeModel" },
-            };
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new LakeController();
-
-
-            const promise = controller.create.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
 
 
     function isController(object: any): object is Controller {

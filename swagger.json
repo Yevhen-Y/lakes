@@ -3,42 +3,7 @@
 	"consumes": [
 		"application/json"
 	],
-	"definitions": {
-		"IFishModel": {
-			"properties": {
-				"name": {
-					"type": "string"
-				}
-			},
-			"required": [
-				"name"
-			],
-			"type": "object"
-		},
-		"ILakeModel": {
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double",
-					"x-nullable": true
-				},
-				"name": {
-					"type": "string"
-				},
-				"fish": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/IFishModel"
-					}
-				}
-			},
-			"required": [
-				"name",
-				"fish"
-			],
-			"type": "object"
-		}
-	},
+	"definitions": {},
 	"info": {
 		"title": "lakedb-project",
 		"version": "1.0.0",
@@ -46,32 +11,7 @@
 			"name": "ISC"
 		}
 	},
-	"paths": {
-		"/lakes": {
-			"post": {
-				"operationId": "Create",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"204": {
-						"description": "No content"
-					}
-				},
-				"security": [],
-				"parameters": [
-					{
-						"in": "body",
-						"name": "requestBody",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/ILakeModel"
-						}
-					}
-				]
-			}
-		}
-	},
+	"paths": {},
 	"produces": [
 		"application/json"
 	],

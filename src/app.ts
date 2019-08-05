@@ -12,7 +12,7 @@ import * as swaggerUi from 'swagger-ui-express'
 
 const app = express();
 app.use(cors());
-app.use(bodyparser.json());
+app.use(bodyparser.json()); // test
 
 app.use(requestLoggerMiddleware);
 RegisterRoutes(app);
